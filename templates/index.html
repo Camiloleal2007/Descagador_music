@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador de Música MP3</title>
+    <link rel="icon" type="image/png" href="https://elements-resized.envatousercontent.com/elements-video-cover-images/79e46fbc-da4a-440b-8730-98259b1ec5ad/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=e73e21e55d6af572ceac555209b33ed9008b16ca9651da03cf23744727160dc9">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/Style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1><i class="fas fa-music"></i> Descargador de Música MP3  <i class="fas fa-music"></i></h1>
+            <p>Descarga tus canciones favoritas en formato MP3</p>
+        </header>
+
+        <main>
+            <div class="tarjeta-descarga">
+                <div class="encabezado-tarjeta">
+                    <i class="fas fa-headphones-alt"></i>
+                    <h2>Ingresa la URL del video o audio</h2>
+                </div>
+                
+                    <form id="download-form" action="/download" method="post">
+                        <input type="text" name="url" id="url-input" placeholder="Pega la URL del video" size="50" required>
+                        <br>
+                        <button type="submit" id="download-button" class="btn-descarga">Descargar MP3</button>
+                    </form>
+                
+                <div class="area-estado">
+                    <div class="barra-progreso">
+                        <div class="progreso" style="width: 0%"></div>
+                    </div>
+                    <p class="texto-estado" id="parrafo">Listo para descargar</p>
+                </div>
+            </div>
+            
+            <div class="caracteristicas">
+                <div class="caracteristica">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Rápido</h3>
+                    <p>Descarga en segundos</p>
+                </div>
+                <div class="caracteristica">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguro</h3>
+                    <p>Sin registro ni instalación</p>
+                </div>
+                <div class="caracteristica">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Calidad</h3>
+                    <p>Audio de alta calidad</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2024 Descargador de Música MP3 | Usa este servicio responsablemente</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+
+

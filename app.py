@@ -1,0 +1,41 @@
+from flask import Flask, request, send_from_directory, render_template
+import yt_dlp
+import os
+import uuid
+
+app = Flask(__name__)
+DOWNLOAD_FOLDER = os.path.join('static','musicas')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/download', methods=['POST'])
+def download():
+    url = request.form['url']
+
+    if not os.path.exists(DOWNLOAD_FOLDER):
+        os.makedirs(DOWNLOAD_FOLDER)
+
+    filename = str(uuid.uuid4()) + ".mp3"
+    filepath = os.path.join(DOWNLOAD_FOLDER, filename)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'outtmpl': filepath,
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'quiet': True,
+        'ffmpeg_location': r'C:\ffmpeg-2025-04-23\bin'
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+
+    return send_from_directory(DOWNLOAD_FOLDER,filename, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
